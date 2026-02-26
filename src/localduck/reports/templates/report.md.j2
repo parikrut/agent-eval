@@ -1,0 +1,42 @@
+# 🦆 LocalDuck Report
+
+> Generated {{ timestamp }} · {{ result.files_scanned }} files scanned
+
+## Summary
+
+| | Count |
+|---|---|
+| 🔴 Critical | {{ counts.critical }} |
+| 🟡 Warning | {{ counts.warning }} |
+| 🔵 Info | {{ counts.info }} |
+| 💾 Cache Hits | {{ result.cache_hits }} |
+| 🔗 Deduped | {{ result.files_deduped }} |
+
+---
+{% if not result.issues %}
+
+✅ **No issues found — clean commit!**
+{% else %}
+
+## Issues
+{% for file_path, issues in issues_by_file.items() %}
+
+### {{ file_path }}
+{% for issue in issues %}
+
+- **{{ issue.severity.value | upper }}** {{ issue.message }}{% if issue.line %} (line {{ issue.line }}){% endif %}{% if issue.suggestion %}
+  💡 {{ issue.suggestion }}{% endif %}
+{% endfor %}
+{% endfor %}
+{% endif %}
+{% if result.skipped_files %}
+
+---
+
+<details>
+<summary>{{ result.skipped_files | length }} files skipped</summary>
+
+{% for f in result.skipped_files %}- {{ f }}
+{% endfor %}
+</details>
+{% endif %}
