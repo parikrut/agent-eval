@@ -1,3 +1,5 @@
+> ⚠️ **Work in Progress** — This project is under active development. Expect bugs, breaking changes, and incomplete features.
+
 # LocalDuck
 
 An AI-powered pre-commit hook that reviews your staged code before it reaches your repo. It catches security issues, code smells, and quality problems at commit time — not in code review.
